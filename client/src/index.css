@@ -1,0 +1,152 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  color: #ffffff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0f0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #FF7E39, #B84F27);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #FFA56B, #FF7E39);
+}
+
+/* Glass morphism utility class */
+.glass {
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 126, 57, 0.2);
+}
+
+.glass-hover:hover {
+  background: rgba(28, 28, 28, 0.9);
+  border: 1px solid rgba(255, 126, 57, 0.4);
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 126, 57, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 40px rgba(255, 126, 57, 0.6);
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+a:focus {
+  outline: 2px solid #FF7E39;
+  outline-offset: 2px;
+}
+
+/* Loading state for images */
+img {
+  transition: opacity 0.3s ease;
+}
+
+/* Selection styling */
+::selection {
+  background: linear-gradient(45deg, #FF7E39, #B84F27);
+  color: white;
+}
+
+/* Backdrop blur support */
+.backdrop-blur-glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Gradient text fix for Safari */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Custom button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #FF7E39 0%, #B84F27 100%);
+  box-shadow: 0 4px 16px rgba(255, 126, 57, 0.3);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 32px rgba(255, 126, 57, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-glass {
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 126, 57, 0.3);
+}
+
+.btn-glass:hover {
+  background: rgba(28, 28, 28, 0.9);
+  border: 1px solid rgba(255, 126, 57, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
