@@ -1,11 +1,10 @@
 import React from 'react'
 import tv from '../assets/tv.svg'
 
-const Television = ({ television, setTelevision, updateState }) => {
+const Television = ({ television, setTelevision }) => {
 
   const toggle = () => {
     setTelevision(television => !television);
-    updateState();
   }
   return (
     <div className={` h-full  flex flex-col items-center justify-center p-2

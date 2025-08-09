@@ -1,11 +1,11 @@
 import React from 'react'
 import hr from '../assets/heater.svg'
 
-const Heater = ({ heater, setHeater, updateState }) => {
+const Heater = ({ heater, setHeater }) => {
 
   const toggle = () => {
     setHeater(heater => !heater);
-    updateState();
+    
   }
 
   return (

@@ -1,10 +1,10 @@
 import React from 'react'
 import ac from '../assets/ac.svg'
 
-const Ac = ({ airConditioner, setAirConditioner, updateState }) => {
+const Ac = ({ airConditioner, setAirConditioner }) => {
   const toggle = () => {
     setAirConditioner(airConditioner => !airConditioner);
-    updateState();
+    
   }
 
   //'bg-gradient-to-br from-orange-500/20 to-red-600/20 border-orange-400/30'

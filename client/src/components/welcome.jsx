@@ -3,8 +3,8 @@ import { Sun, Moon, Home, User } from 'lucide-react'
 import dayImage from '../assets/day.svg' // Your first image
 import nightImage from '../assets/night.svg' // Your second image
 import {Link} from 'react-router-dom'
-const Welcome = ({connectionStatus}) => {
-  const [isDay, setIsDay] = useState(true)
+const Welcome = ({connectionStatus, setIsDay, isDay}) => {
+  
   const [currentTime, setCurrentTime] = useState(new Date())
 
   useEffect(() => {

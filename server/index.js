@@ -11,6 +11,7 @@ let sseClients = [];
 let setState = 0;
 let state;
 let deviceConnected;
+let stateQueue = [];
 
 // Middleware to parse JSON requests
 app.use(express.json());
@@ -36,18 +37,9 @@ app.get('/initial', (req, res) => {
 
 app.post('/state/update', (req, res) => {
     const { heater, ac, television, fan } = req.body;
-
-    // Here you would typically save the data to a database or process it
     //console.log('Received state update:', { heater, ac, television, fan });
-
-    // Prepare data for SSE broadcast
-    state = {heater, ac, television, fan };
-    setState = 1;
-
-    res.json({
-        message: 'State update received successfully',
-        status: 'success',
-    });
+    stateQueue.push({ heater, ac, television, fan, timestamp: Date.now() });
+    res.json({ message: 'State queued successfully', status: 'success' });
 });
 
 // Endpoint for server sent events
@@ -70,17 +62,17 @@ app.get('/sensor-stream', (req, res) => {
     };
     sseClients.push(client);
 
-    //console.log(`SSE Client ${clientId} connected. Total clients: ${sseClients.length}`);
+    ////console.log(`SSE Client ${clientId} connected. Total clients: ${sseClients.length}`);
 
     // Handle client disconnect
     req.on('close', () => {
-        //console.log(`SSE Client ${clientId} disconnected`);
+        ////console.log(`SSE Client ${clientId} disconnected`);
         sseClients = sseClients.filter(client => client.id !== clientId);
-        //console.log(`Total clients: ${sseClients.length}`);
+        ////console.log(`Total clients: ${sseClients.length}`);
     });
 
     req.on('aborted', () => {
-        //console.log(`SSE Client ${clientId} aborted connection`);
+        ////console.log(`SSE Client ${clientId} aborted connection`);
         sseClients = sseClients.filter(client => client.id !== clientId);
     });
 })
@@ -88,11 +80,11 @@ app.get('/sensor-stream', (req, res) => {
 // Function to broadcast data to all connected SSE clients
 function broadcastToClients(data) {
     if (sseClients.length === 0) {
-        //console.log('No SSE clients connected');
+        ////console.log('No SSE clients connected');
         return;
     }
 
-    //console.log(`Broadcasting to ${sseClients.length} clients:`, data);
+    ////console.log(`Broadcasting to ${sseClients.length} clients:`, data);
     
     // Remove disconnected clients
     sseClients = sseClients.filter(client => {
@@ -100,7 +92,7 @@ function broadcastToClients(data) {
             client.response.write(`data: ${JSON.stringify(data)}\n\n`);
             return true;
         } catch (error) {
-            //console.log('Client disconnected during broadcast:', error.message);
+            ////console.log('Client disconnected during broadcast:', error.message);
             return false;
         }
     });
@@ -112,7 +104,7 @@ app.post('/initial/reading', (req, res) => {
     const { heater, ac, television, fan } = req.body;
 
     // Here you would typically save the data to a database or process it
-    //console.log('Received initial data:', { heater, ac, television, fan });
+    ////console.log('Received initial data:', { heater, ac, television, fan });
 
     // Prepare data for SSE broadcast
     const initialData = {
@@ -132,23 +124,25 @@ app.post('/initial/reading', (req, res) => {
 
 //Arduino sensor data endpoint
 app.post('/sensor/reading', (req, res) => { 
-    const { temperature, humidity, lightLevel, soundLevel } = req.body;
+    const { temperature, humidity, lightLevel, soundLevel, batteryLevel } = req.body;
 
     // Validate the incoming data
     if (typeof temperature !== 'number' || typeof humidity !== 'number' || 
-        typeof lightLevel !== 'number' || typeof soundLevel !== 'number') {
+        typeof lightLevel !== 'number' || typeof soundLevel !== 'number' || typeof batteryLevel !== 'number') {
         return res.status(400).json({ error: 'Invalid sensor data format' });
     }
 
     // Here you would typically save the data to a database or process it
-    //console.log('Received sensor data:', { temperature, humidity, lightLevel, soundLevel });
+    ////console.log('Received sensor data:', { temperature, humidity, lightLevel, soundLevel });
 
     // Prepare data for SSE broadcast
     const sensorData = {
         type: 'sensor-update',
         timestamp: new Date().toISOString(),
-        data: { temperature, humidity, lightLevel, soundLevel }
+        data: { temperature, humidity, lightLevel, soundLevel, batteryLevel }
     };
+
+    //console.log('Sensor data:', sensorData);
 
     // Broadcast to all connected SSE clients immediately
     broadcastToClients(sensorData);
@@ -161,20 +155,14 @@ app.post('/sensor/reading', (req, res) => {
 })
 
 app.get('/state/reading', (req, res) => {
-    if (setState == 1) {
-        //console.log('Sending state data:', state);
-        res.json({
-            message: true,
-            status: 'success',
-            data: state
-        });
-        setState = 0; // Reset after sending   
+    //last in, first out and then clear
+    if (stateQueue.length > 0) {
+        const nextState = stateQueue.pop();
+        stateQueue = []; // Clear the queue after processing
+        res.json({ message: true, status: 'success', data: nextState });
     } else {
-        res.json({
-            message: false,
-            status: 'success'
-        });
-    }   
+        res.json({ message: false, status: 'success' });
+    }
 });
 
 app.get('/heartbeat/reading', (req, res) => {
@@ -214,7 +202,7 @@ setInterval(() => {
 
 // Start the server
 app.listen(PORT, () => {
-  //console.log(`Server is running on http://localhost:${PORT}`);
+  ////console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 module.exports = app;

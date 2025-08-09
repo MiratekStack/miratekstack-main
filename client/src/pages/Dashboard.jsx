@@ -3,6 +3,7 @@ import Temperature from '../components/temperature'
 import Humidity from '../components/humidity'
 import SoundLevel from '../components/soundLevel'
 import LightLevel from '../components/lightLevel'
+import BatteryLevel from '../components/batteryLevel'
 import Fan from '../components/fan'
 import Heater from '../components/heater'
 import Ac from '../components/ac'
@@ -15,13 +16,14 @@ import { use } from 'react'
 
 
 function Dashboard() {
-  const serverUrl = 'https://server.miratekstack.com';
+  const serverUrl = 'https://server.miratekstack.com'; // Adjust this URL as needed
   const [loading, setLoading] = useState(false);
 
   const [temperature, setTemperature] = useState(0);
   const [humidity, setHumidity] = useState(0);
   const [lightLevel, setLightLevel] = useState(0);
   const [soundLevel, setSoundLevel] = useState(0);
+  const [batteryLevel, setBatteryLevel] = useState(0);
 
   const [heater, setHeater] = useState(false);
   const [airConditioner, setAirConditioner] = useState(false);
@@ -32,12 +34,15 @@ function Dashboard() {
   const [connectionStatus, setConnectionStatus] = useState('disconnected');
   const [lastUpdate, setLastUpdate] = useState(null);
 
+  const [isDay, setIsDay] = useState(true)
+
   const formatToBoolean = (value) => {
     let rvalue = value >= 1 ? true : false;
     return rvalue;
   }
 
   const formatToInt = (value) => {
+    ////console.log('Formatting value to int:', value);
     let rvalue = value ? 1 : 0;
     return rvalue;
   }
@@ -51,7 +56,7 @@ function Dashboard() {
       fan: formatToInt(fan)
     };
 
-    console.log('Sending state update:', stateUpdate);
+    //console.log('Sending state update:', stateUpdate);
 
     fetch(`${serverUrl}/state/update`, {
       method: 'POST',
@@ -62,38 +67,40 @@ function Dashboard() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Success:', data);
+        //console.log('Success:', data);
       })
       .catch(error => {
         console.error('Error:', error);
       });
   };
 
-  const updateState = () => {
+  useEffect(() => {
     sendStateUpdate();
-  }
+  }, [heater, airConditioner, television, fan]);
+
 
   useEffect(() => {
     // Create SSE connection
     const connectSSE = () => {
-      console.log('Connecting to SSE...');
+      //console.log('Connecting to SSE...');
       eventSourceRef.current = new EventSource(`${serverUrl}/sensor-stream`);
 
       eventSourceRef.current.onopen = () => {
-        console.log('SSE Connection opened');
+        //console.log('SSE Connection opened');
       };
 
       eventSourceRef.current.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data);
-          console.log('Received SSE data:', data);
+          //console.log('Received SSE data:', data);
 
           if (data.type === 'sensor-update') {
             setTemperature(data.data.temperature);
             setHumidity(data.data.humidity);
             setLightLevel(data.data.lightLevel);
             setSoundLevel(data.data.soundLevel);
-            //console.log('Sensor data updated:', data.data);
+            setBatteryLevel(data.data.batteryLevel);
+            ////console.log('Sensor data updated:', data.data);
 
             //Update last update time if available
             setLastUpdate(new Date(data.timestamp));
@@ -102,14 +109,14 @@ function Dashboard() {
             setFan(formatToBoolean(data.data.fan));
             setTelevision(formatToBoolean(data.data.television));
             setAirConditioner(formatToBoolean(data.data.ac));
-            //console.log('State data updated:', data.data);
+            ////console.log('State data updated:', data.data);
 
             // Update last update time if available
             setLastUpdate(new Date(data.timestamp));
           } else if (data.type === 'connection') {
-            console.log('Connection established:', data.message);
+            //console.log('Connection established:', data.message);
           } else if (data.type === 'device') {
-            console.log('Connection', data.data.connected);
+            //console.log('Connection', data.data.connected);
             setConnectionStatus(data.data.connected ? 'connected' : 'disconnected');
           }
         } catch (error) {
@@ -140,17 +147,17 @@ function Dashboard() {
   }, []);
 
 
-//  Initial state
+  //  Initial state
   useEffect(() => {
     fetch(`${serverUrl}/initial`)
       .then(response => response.json())
       .then(data => {
         setLoading(false);
-        console.log(data);
+        //console.log(data);
       })
       .catch(error => console.error('Error fetching initial data:', error));
   }, []);
-  
+
 
   return (
     <>
@@ -184,28 +191,30 @@ function Dashboard() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
                   {/* Welcome Card - Takes 2 columns on large screens */}
                   <div className="lg:col-span-2">
-                    <Welcome connectionStatus={connectionStatus}/>
+                    <Welcome connectionStatus={connectionStatus} isDay={isDay} setIsDay={setIsDay} />
                   </div>
 
                   {/* Environmental Sensors */}
                   <div className="grid grid-cols-2 lg:grid-cols-1 gap-3 md:gap-4">
                     <SoundLevel soundLevel={soundLevel} />
+
                     <LightLevel lightLevel={lightLevel} />
                   </div>
                 </div>
 
-                {/* Middle Section - Temperature & Humidity */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                {/* Middle Section - Temperature & Humidity & BAttery Level*/}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                   <Temperature temperature={temperature} />
+                  <BatteryLevel batteryLevel={batteryLevel} isDay={isDay} />
                   <Humidity humidity={humidity} />
                 </div>
 
                 {/* Bottom Section - Device Controls */}
                 <div className="grid grid-cols-2 h-[500px] md:h-[300px] md:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
-                  <Fan fan={fan} setFan={setFan} updateState={updateState} />
-                  <Heater heater={heater} setHeater={setHeater} updateState={updateState} />
-                  <Ac airConditioner={airConditioner} setAirConditioner={setAirConditioner} updateState={updateState} />
-                  <Television television={television} setTelevision={setTelevision} updateState={updateState} />
+                  <Fan fan={fan} setFan={setFan} />
+                  <Heater heater={heater} setHeater={setHeater} />
+                  <Ac airConditioner={airConditioner} setAirConditioner={setAirConditioner} />
+                  <Television television={television} setTelevision={setTelevision} />
                 </div>
 
               </div>

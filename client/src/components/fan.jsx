@@ -1,10 +1,10 @@
 import React from 'react'
 import fanImage from '../assets/fan.svg'
 
-const Fan = ({ fan, setFan, updateState }) => {
+const Fan = ({ fan, setFan }) => {
    const toggle = () => {
     setFan(fan => !fan);
-    updateState();
+    
   }
   return (
     <div className={` h-full  flex flex-col items-center justify-center p-2
