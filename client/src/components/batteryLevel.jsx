@@ -12,7 +12,7 @@ const BatteryLevel = ({ batteryLevel = 85, isDay }) => {
         <div
             className={`
       relative overflow-hidden
-      w-full h-full
+      w-full min-h-[180px]
       bg-black/50
       backdrop-blur-xl backdrop-brightness-30
       rounded-3xl shadow-xl

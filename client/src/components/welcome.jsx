@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Sun, Moon, Home, User } from 'lucide-react'
+import { Sun, Moon, Home, LogOut } from 'lucide-react'
 import dayImage from '../assets/day.svg' // Your first image
 import nightImage from '../assets/night.svg' // Your second image
 import {Link} from 'react-router-dom'
+
 const Welcome = ({connectionStatus, setIsDay, isDay}) => {
-  
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    window.location.reload(); // Reload to update the UI
+  }
   const [currentTime, setCurrentTime] = useState(new Date())
 
   useEffect(() => {
@@ -97,17 +102,32 @@ const Welcome = ({connectionStatus, setIsDay, isDay}) => {
             </span>
           </div>
           
-          {/* Day/Night Toggle */}
+          <div className="flex items-center gap-3">
+  {/* Day/Night Toggle */}
           <button 
             onClick={() => setIsDay(!isDay)}
             className={`
               p-2 rounded-full backdrop-blur-md
-              ${isDay ? 'bg-orange-400/20 text-yellow-200' : 'bg-blue-400/20 text-blue-200'}
+              ${isDay ? 'bg-orange-500/30 text-yellow-200' : 'bg-blue-500/30 text-blue-200'}
               hover:scale-110 transition-all duration-300
             `}
           >
-            {isDay ? <Sun className="w-5 h-5" strokeWidth={0.75}/> : <Moon className="w-5 h-5" strokeWidth={0.75}/>}
+            {isDay ? <Sun className={`w-5 h-5  ${isDay ? 'text-orange-100' : 'text-indigo-100'}`} strokeWidth={0.75}/> : <Moon className="w-5 h-5" strokeWidth={0.75}/>}
           </button>
+
+            {/* Logout */}
+          <button 
+            onClick={() => handleLogout()}
+            className={`
+              p-2 rounded-full backdrop-blur-md
+              ${isDay ? 'bg-orange-500/30 text-yellow-200' : 'bg-blue-500/30 text-blue-200'}
+              hover:scale-110 transition-all duration-300
+            `}
+          >
+           <LogOut className={`w-5 h-5  ${isDay ? 'text-orange-100' : 'text-indigo-100'}`} strokeWidth={0.75}/> 
+          </button>
+            </div>
+        
         </div>
 
         {/* Main Content */}

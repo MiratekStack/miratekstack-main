@@ -12,7 +12,6 @@ import Welcome from '../components/welcome'
 import bg from '../assets/bg.png'
 import { ToastContainer, toast } from 'react-toastify';
 import Loading from '../components/loading'
-import { use } from 'react'
 
 
 function Dashboard() {

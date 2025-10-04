@@ -1,5 +1,5 @@
 import React from 'react'
-import hr from '../assets/heater.svg'
+import light from '../assets/light.png'
 
 const Heater = ({ heater, setHeater }) => {
 
@@ -23,14 +23,14 @@ const Heater = ({ heater, setHeater }) => {
       {/* HR Icon Container */}
       <div className="flex items-center justify-center">
         <div className={`
-          relative w-full h-full max-w-[170px] max-h-[170px]
+          relative w-[118px] h-[118px] md:w-[160px] md:h-[160px]
           transition-all duration-300
           ${heater ? 'drop-shadow-lg' : 'opacity-60'}
         `}>
           <img 
-            src={hr} 
+            src={light} 
             className="w-full h-full object-cover" 
-            alt="Heater" 
+            alt="Light" 
           />
           {/* Glow effect when active */}
           {heater && (
@@ -46,7 +46,7 @@ const Heater = ({ heater, setHeater }) => {
           ${heater ? 'text-white' : 'text-gray-300'}
           transition-colors duration-300
         `}>
-          Heater
+          Light
         </h1>
         <p className={`
           text-sm mt-1 font-medium text-start

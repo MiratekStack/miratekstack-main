@@ -6,7 +6,7 @@ import Features from '../components/Features';
 import Products from '../components/Products';
 import Footer from '../components/Footer';
 import Loading from '../components/loading'; 
-
+import Testimonial from '../components/Testimonial';
 function Home() {
   const [isLoading, setIsLoading] = useState(false);
  
@@ -20,6 +20,7 @@ function Home() {
       <Hero />
       <Features />
       <Products />
+      <Testimonial />
       <Footer />
     </div>
   );

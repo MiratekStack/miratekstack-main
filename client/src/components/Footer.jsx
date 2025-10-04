@@ -1,12 +1,14 @@
-import { Home, Mail, Phone, MapPin} from 'lucide-react';
+import {Mail, Phone, MapPin} from 'lucide-react';
 import logo from '../assets/miratekLogo.jpeg'; 
+
+
 const Footer = () => {
  
   return (
-    <footer className="bg-bg-secondary border-t border-divider relative">
+    <footer className="bg-bg-secondary  relative">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-orange-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-gradient-primary rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -48,7 +50,7 @@ const Footer = () => {
   
 
         {/* Bottom bar */}
-        <div className="border-t border-divider mt-16 pt-8">
+        <div className=" mt-16 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-text-secondary text-sm">
               © 2025 Miratek Smart Home. All rights reserved.
