@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Eye, EyeOff, Lock, Mail, AlertCircle, CheckCircle } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
-import logo from '../assets/miratekLogo.jpeg'; 
+import logo from '../../assets/miratekLogo.jpeg'; 
 
 const mainEmail = "miratekstack@gmail.com";
 const mainPassword = "12345678"
@@ -64,8 +64,8 @@ function MiratekSignIn() {
   return (
    <div className="min-h-screen bg-bg-primary flex items-center justify-center px-4 py-12 relative overflow-hidden font-inter">
   {/* Background Decorative Elements */}
-  <div className="absolute top-0 left-0 w-96 h-96 bg-orange-primary/10 rounded-full blur-3xl"></div>
-  <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-primary/10 rounded-full blur-3xl"></div>
+  <div className="absolute top-0 left-0 w-96 h-96 bg-orange-primary/30 rounded-full blur-3xl animate-pulse-slow"></div>
+  <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-primary/30 rounded-full blur-3xl animate-pulse-slow"></div>
 
   {/* Main Content */}
   <div className="w-full max-w-md relative z-10">
@@ -96,7 +96,7 @@ function MiratekSignIn() {
     )}
 
     {/* Sign In Card */}
-    <div className="card-darker-light-darker-light border border-divider rounded-2xl p-8 shadow-card hover:border-orange-primary/30 transition-all duration-300">
+    <div className="bg-card-light/30 backdrop-blur-lg border border-divider rounded-2xl p-8 shadow-card hover:border-orange-primary/30 transition-all duration-300">
       <div className="space-y-6">
         {/* Email Field */}
         <div>
@@ -185,7 +185,7 @@ function MiratekSignIn() {
           </label>
           <a
             href="#"
-            className="text-orange-primary hover:text-orange-glow transition-colors text-sm font-medium"
+            className="text-orange-primary brightness-75 hover:text-orange-glow transition-colors text-sm font-medium"
           >
             Forgot password?
           </a>
@@ -196,15 +196,15 @@ function MiratekSignIn() {
           type="button"
           onClick={handleSubmit}
           disabled={isLoading}
-          className="w-full bg-gradient-orange hover:bg-gradient-orange-glow text-text-primary font-semibold py-3 px-6 rounded-xl transition-all duration-300 shadow-orange-glow hover:shadow-orange-glow-lg disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
+          className="w-full bg-orange-secondary hover:bg-gradient-orange text-text-primary font-semibold py-3 px-6 rounded-xl transition-all  disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
         >
           {isLoading ? (
             <div className="flex items-center justify-center gap-2">
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-              <span>Signing in...</span>
+              <span className='text-white text-lg'>Signing in...</span>
             </div>
           ) : (
-            <span className="relative z-10">Sign In</span>
+            <span className="relative z-10 text-white text-lg">Sign In</span>
           )}
           <div className="absolute inset-0 bg-gradient-orange-glow opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
@@ -214,7 +214,7 @@ function MiratekSignIn() {
     {/* Sign Up Link */}
     <p className="text-center mt-6 text-text-secondary">
       Don't have an account?{' '}
-      <a href="#" className="text-orange-primary hover:text-orange-glow font-medium transition-colors">
+      <a href="#" className="text-orange-primary brightness-75 hover:text-orange-glow font-medium transition-colors">
         Sign up for free
       </a>
     </p>

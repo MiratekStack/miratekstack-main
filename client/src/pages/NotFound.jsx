@@ -24,10 +24,10 @@ const ErrorPage = () => {
 
       <div className="relative max-w-4xl mx-auto px-8 sm:px-10 lg:px-14 text-center">
         {/* Error illustration */}
-        <div className="mb-12">
+        <div className="">
           <div className="relative mx-auto  animate-pulse flex items-center justify-center">
          
-              <div className="text-[26rem] lg:text-[28rem] font-bold text-orange-primary mb-4">
+              <div className="text-[16rem] lg:text-[18rem] font-bold text-orange-primary">
                 404
               </div>
          
@@ -48,7 +48,7 @@ const ErrorPage = () => {
           
           <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
             The page you are looking for seems to have wandered off into the void. 
-            D
+            
           </p>
         </div>
 

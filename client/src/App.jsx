@@ -14,8 +14,13 @@ import CaseStudies from './pages/CaseStudies';
 import Contact from './pages/Contact';
 import Support from './pages/Support';
 
-import Signin from './pages/Signin';
-
+import SignIn from './pages/auth/SignIn';
+import SignUp from './pages/auth/SignUp';
+import SignOut from './pages/auth/SignOut';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
+import EmailVerified from './pages/auth/EmailVerified';
+import EmailVerificationNotice from './pages/auth/EmailVerificationNotice';
 
 import MainLayout from './layouts/MainLayout';
 
@@ -56,7 +61,13 @@ function App() {
     <Route path="/support" element={<Support />} />
     </Route>
     <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-    <Route path='/signin' element={<PublicRoute><Signin /></PublicRoute>} />
+    <Route path='/signin' element={<PublicRoute><SignIn /></PublicRoute>} />
+     <Route path='/signup' element={<PublicRoute><SignUp /></PublicRoute>} />
+      <Route path='/signout' element={<PublicRoute><SignOut /></PublicRoute>} />
+      <Route path='/forgot-password' element={<PublicRoute><ForgotPassword /></PublicRoute>} />
+      <Route path='/reset-password' element={<PublicRoute><ResetPassword /></PublicRoute>} />
+      <Route path='/email-verified' element={<PublicRoute><EmailVerified /></PublicRoute>} />
+      <Route path='/email-verification-notice' element={<PublicRoute><EmailVerificationNotice /></PublicRoute>} />
     <Route path='*' element={<NotFound />} />
    </Routes>
   );

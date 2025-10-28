@@ -28,8 +28,8 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo - Updated to navigate to Home on click */}
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNavigation('/')}>
-            <div className="w-10 h-10e rounded-xl flex items-center justify-center">
-             <img src={logo} className='w-full h-full' alt="Miratek Logo"/>
+            <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center">
+             <img src={logo} className='w-full h-full ' alt="Miratek Logo"/>
             </div>
             <span className="text-2xl font-bold text-text-primary">Miratek</span>
           </div>
@@ -40,7 +40,7 @@ const Header = () => {
               <button
                 key={item.name}
                 onClick={() => handleNavigation(item.path)}
-                className="text-text-secondary text-lg hover:text-orange-primary transition-colors duration-300 font-medium relative group focus:outline-none"
+                className="text-text-secondary text-lg sm:text-md md:text-md lg:text-md hover:text-orange-primary transition-colors duration-300 font-medium relative group focus:outline-none"
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-orange transition-all duration-300 group-hover:w-full"></span>
@@ -50,7 +50,7 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center">
-            <button className="btn-primary text-white px-6 py-2.5 rounded-xl font-semibold hover:shadow-orange-glow-lg transition-all duration-300 transform hover:scale-105" onClick={() => navigate('/dashboard')}>
+            <button className="btn-primary text-white px-6 py-2.5 lg:px-4 lg:py-2.5 rounded-xl font-semibold hover:shadow-orange-glow-lg transition-all duration-300 transform hover:scale-105" onClick={() => navigate('/dashboard')}>
              View Our Demo
             </button>
           </div>

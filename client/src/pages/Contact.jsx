@@ -19,7 +19,7 @@ const Contact = () => {
 
                         <div className="container mx-auto px-4">
                             <div className="relative z-10 mx-auto max-w-4xl text-center">
-                                <h1 className="text-4xl font-black leading-tight tracking-[-0.033em] text-text-primary dark:text-text-primary-dark sm:text-5xl lg:text-6xl">Let’s Build Your Intelligent Home.</h1>
+                                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-[-0.033em] text-text-primary dark:text-text-primary-dark">Let’s Build Your Intelligent Home.</h1>
                                 <p className="mt-6 text-base font-normal leading-normal text-text-primary/80 dark:text-text-primary-dark/80 sm:text-lg">
                                     We are here to help you bring intelligent living to life. Tell us a little about your home or project, and our team will reach out to craft your personalized automation experience.
                                 </p>
