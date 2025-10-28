@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import Hero from '../components/Hero';
-import Features from '../components/Features';
-import Products from '../components/Products';
-import Footer from '../components/Footer';
+import React, { useState } from 'react';
+import Header from '../components/home/Header';
+import Hero from '../components/home/Hero';
+import Features from '../components/home/Features';
+import Products from '../components/home/Products';
+import Footer from '../components/home/Footer';
 import Loading from '../components/loading'; 
-import Testimonial from '../components/Testimonial';
+import Testimonial from '../components/home/Testimonial';
 function Home() {
   const [isLoading, setIsLoading] = useState(false);
  
@@ -16,12 +16,10 @@ function Home() {
 
   return (
     <div className="font-inter bg-gradient-primary text-text-primary min-h-screen">
-      <Header />
       <Hero />
       <Features />
       <Products />
       <Testimonial />
-      <Footer />
     </div>
   );
 }

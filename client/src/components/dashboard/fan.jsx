@@ -1,5 +1,5 @@
 import React from 'react'
-import fanImage from '../assets/fan.svg'
+import fanImage from '../../assets/fan.svg'
 
 const Fan = ({ fan, setFan }) => {
    const toggle = () => {

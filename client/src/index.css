@@ -43,14 +43,14 @@ body {
 
 /* Glass morphism utility class */
 .glass {
-  background: rgba(18, 18, 18, 0.8);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 126, 57, 0.2);
 }
 
 .glass-hover:hover {
-  background: rgba(28, 28, 28, 0.9);
+  background: rgba(240, 240, 240, 0.9);
   border: 1px solid rgba(255, 126, 57, 0.4);
 }
 

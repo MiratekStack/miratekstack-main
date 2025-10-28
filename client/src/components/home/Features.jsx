@@ -12,7 +12,7 @@ const Features = () => {
     {
       icon: <Thermometer className="w-8 h-8" strokeWidth={1} />,
       title: 'Climate Control',
-      description: 'Advanced temperature management with AI-powered optimization for maximum comfort.',
+      description: 'Advanced temperature management for maximum comfort.',
       bgGradient: 'from-success to-emerald-600',
       glowColor: 'shadow-green-500/30'
     },

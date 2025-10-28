@@ -1,5 +1,5 @@
 import React from 'react'
-import ac from '../assets/ac.svg'
+import ac from '../../assets/ac.svg'
 
 const Ac = ({ airConditioner, setAirConditioner }) => {
   const toggle = () => {

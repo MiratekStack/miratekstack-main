@@ -1,5 +1,5 @@
 import { ArrowRight, Smartphone, Tablet, Monitor, Watch } from 'lucide-react';
-import miratek from '../assets/miratek.svg'; 
+import miratek from '../../assets/miratek.svg'; 
 const Products = () => {
   const devices = [
     { icon: <Smartphone className="w-6 h-6" />, name: 'Mobile', status: 'Connected', color: 'bg-success' },

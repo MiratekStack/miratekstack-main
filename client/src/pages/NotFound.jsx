@@ -4,13 +4,6 @@ import { useNavigate } from 'react-router-dom';
 const ErrorPage = () => {
   const navigate = useNavigate();
 
-  const quickLinks = [
-    { name: 'Home', href: '/', icon: <Home className="w-5 h-5" /> },
-    { name: 'Features', href: '/#features', icon: <Zap className="w-5 h-5" /> },
-    { name: 'Products', href: '/#products', icon: <Search className="w-5 h-5" /> },
-    { name: 'Pricing', href: '/#pricing', icon: <AlertTriangle className="w-5 h-5" /> },
-  ];
-
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -29,27 +22,16 @@ const ErrorPage = () => {
         <div className="absolute bottom-20 left-20 w-2 h-2 bg-orange-glow rounded-full animate-bounce-slow opacity-40" />
       </div>
 
-      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative max-w-4xl mx-auto px-8 sm:px-10 lg:px-14 text-center">
         {/* Error illustration */}
         <div className="mb-12">
-          <div className="relative mx-auto w-80 h-80 glass rounded-3xl shadow-glass animate-float flex items-center justify-center">
-            {/* 404 Display */}
-            <div className="text-center">
-              <div className="text-8xl lg:text-9xl font-bold bg-gradient-orange bg-clip-text text-transparent mb-4">
+          <div className="relative mx-auto  animate-pulse flex items-center justify-center">
+         
+              <div className="text-[26rem] lg:text-[28rem] font-bold text-orange-primary mb-4">
                 404
               </div>
-              <div className="w-16 h-16 mx-auto bg-gradient-orange rounded-2xl flex items-center justify-center shadow-orange-glow mb-4">
-                <AlertTriangle className="w-8 h-8 text-white" />
-              </div>
-            </div>
+         
 
-            {/* Floating elements */}
-            <div className="absolute -top-6 -right-6 w-12 h-12 glass rounded-2xl shadow-glass animate-bounce-slow opacity-80 flex items-center justify-center">
-              <Search className="w-6 h-6 text-orange-primary" />
-            </div>
-            <div className="absolute -bottom-6 -left-6 w-10 h-10 glass rounded-2xl shadow-glass animate-pulse-slow opacity-80 flex items-center justify-center">
-              <Home className="w-5 h-5 text-success" />
-            </div>
           </div>
         </div>
 
@@ -65,8 +47,8 @@ const ErrorPage = () => {
           </h1>
           
           <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-            The page you're looking for seems to have wandered off into the smart home void. 
-            Don't worry, our AI assistant is already working to bring it back online.
+            The page you are looking for seems to have wandered off into the void. 
+            D
           </p>
         </div>
 
@@ -81,7 +63,7 @@ const ErrorPage = () => {
           </button>
           <button 
             onClick={handleGoBack}
-            className="group btn-glass text-text-primary px-8 py-4 rounded-xl font-semibold hover:text-orange-primary transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3"
+            className="group btn-glass text-white px-8 py-4 rounded-xl font-semibold hover:text-orange-primary transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
             <span>Go Back</span>

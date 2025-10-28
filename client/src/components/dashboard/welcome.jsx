@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Sun, Moon, Home, LogOut } from 'lucide-react'
-import dayImage from '../assets/day.svg' // Your first image
-import nightImage from '../assets/night.svg' // Your second image
+import dayImage from '../../assets/day.svg' // Your first image
+import nightImage from '../../assets/night.svg' // Your second image
 import {Link} from 'react-router-dom'
 
 const Welcome = ({connectionStatus, setIsDay, isDay}) => {
